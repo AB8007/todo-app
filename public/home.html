@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etusivu - ToDo App</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link href="styles.css" rel="stylesheet" type="text/css" id="lightMode">
+    <link href="darkmode.css" rel="stylesheet" type="text/css" id="darkMode" disabled>
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="header"><h2>ToDo App</h2>
+        <button id="darkModeToggle">Teema<i class="fa-sharp fa-solid fa-circle-half-stroke"></i></button>
+        <h1>|</h1>
+        <button class="logOutButton"> <a href="index.html">Kirjaudu ulos</a>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+    </button>
+</div>
+    <div class="infoBox">
+        <div class="headerSmall"><h1></h1></div>
+        <h2>Tämä on Fullstack-ohjelmointikurssin harjoitustyönä toteutettu ToDo-sovellus.</h2>
+        <h2>Sovellus on hyödyntää MongoDB-palvelua tietokantana sekä käyttäjätiedoille että tallennetuille tehtäville.</h2>
+        <h2>Sovellus on toteutettu siten, että käyttäjä näkee vain itse tallentamansa tehtävät.</h2>
+        <button class="enterApp" onclick="clickButton()">Tästä sovellukseen!</button>
+    </div>
+</body>
+</html>

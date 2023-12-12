@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+body {
+    background-color: aliceblue;
+
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #3274d6;
+    height: 60px;
+    padding: 0 20px; 
+    text-align: center;
+    color: white;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1); 
+  }
+
+.header h2 {
+    font-size: 1.3em;
+    margin: 0;
+}
+
+.login {
+    width: 400px;
+    background-color: #ffffff;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 100px auto;
+}
+
+.login h1 {
+    text-align: center;
+    color: #5b6574;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+
+.login form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.login form label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #3274d6;
+    color: #ffffff;
+}
+
+.login form input[type="password"],
+.login form input[type="text"] {
+    width: 310px;
+    height: 50px;
+    border: 1px solid #dee0e4;
+    margin-bottom: 20px;
+    padding: 0 15px;
+    background-color: #ffffff;
+    
+}
+
+.login form input[type="submit"],
+.login form .registerButton {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #3274d6; 
+    border: 0;
+}
+
+.login form input[type="submit"]:hover,
+.login form .registerButton:hover {
+    background-color: #1d509e;
+    transition: background-color 0.2s;
+}
+
+.login p a {
+    color: #3274d6; 
+    text-decoration: none;
+}
+
+.login p a:hover {
+    color: #1d509e; 
+}
+
+#darkModeToggle {
+    margin-left: auto; 
+    cursor: pointer;
+    background-color: transparent; 
+    border: none;
+    color: #ffffff; 
+}
+
+#darkModeToggle i {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.logOutButton {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+    padding: 1em;
+}
+
+.logOutButton i {
+    margin-left: 5px;
+}
+
+.logOutButton a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.infoBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    background-color: #ffffff; 
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 100px auto;
+}
+
+.infoBox .interface #infoText {
+    margin-bottom: 20px;
+ }
+
+.infoBox h1 {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    padding: 20px 0 20px 0; 
+}
+
+.infoBox h2 {
+    text-align: center;
+    color: black;
+    font-size: 18px;
+    padding: 20px;
+    font-weight: lighter;
+}
+
+.headerSmall {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    background-color: #3274d6;
+    height: 60px;
+    color: white;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+}
+
+.headerSmall h1 {
+    color: #ffffff;
+    margin: 0; 
+}
+
+.headerApp {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    background-color: #3274d6;
+    height: 60px;
+    color: white;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.1); 
+    width: 100%;
+}
+
+.headerApp h1 {
+    color: #ffffff;
+    margin: 0; 
+}
+
+.enterApp {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #3274d6; 
+    border: 0;
+}
+
+.enterApp a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.interface {
+    margin: 0 auto;
+}
+
+.addTodo {
+    padding: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #3274d6; 
+    border: 0;
+}
+
+.inputTodo {
+    width: 310px;
+    height: 50px;
+    border: 1px solid #dee0e4;
+    margin-bottom: 20px;
+    padding: 0 15px;
+    background-color: #ffffff;
+}
+
+.delete {
+    cursor: pointer;
+    color: #3274d6;
+    font-weight: bold;
+    padding: 1em;
+  }

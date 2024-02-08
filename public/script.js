@@ -1,16 +1,17 @@
+// Function for handling user registration
 async function registerNewUser() {
-  // Haetaan käyttäjän antama käyttäjänimi ja salasana lomakkeelta
+  // Requesting given information from the element
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  // Luodaan käyttäjä-objekti
+  // Defining "user" object
   const user = {
     username: username,
     password: password,
   };
 
   try {
-    // Lähetetään POST-pyyntö palvelimelle käyttäjän rekisteröintiä varten
+    // POST request to add the new user
     const response = await fetch('http://localhost:3000/signup', {
       method: 'POST',
       headers: {
@@ -20,15 +21,14 @@ async function registerNewUser() {
     });
     // Tarkistetaan palvelimen vastaus
     if (response.ok) {
-      // Jos vastaus onnistui, tulostetaan käyttäjätiedot konsoliin
+      // ...
       const userData = await response.json();
-      console.log(userData);
     } else {
-      // Jos vastaus ei ole ok, tulostetaan virheviesti konsoliin
+      // ...
       const data = await response.json();
       console.error(data);
     }
-    // Käsitellään mahdollinen virhe
+    // Error handling
   } catch (error) {
     console.error('Error:', error);
     alert("Käyttäjänimi on jo käytössä!");
@@ -39,26 +39,26 @@ async function registerNewUser() {
 
 
 
-// darkmode
+// Darkmode function
 
-// teeman tallennus
 document.addEventListener('DOMContentLoaded', function () {
   const lightModeStylesheet = document.getElementById('lightMode');
   const darkModeStylesheet = document.getElementById('darkMode');
   const darkModeToggle = document.getElementById('darkModeToggle');
 
-  // Tarkistetaan onko talletettua teemaa local storagessa
+  // Checking for saved theme in the local storage
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
       applyTheme(savedTheme);
   }
 
+  // Adding event listener for the button clicks, clicking the button changes the value
   darkModeToggle.addEventListener('click', function () {
       const currentTheme = lightModeStylesheet.disabled ? 'dark' : 'light';
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
       applyTheme(newTheme);
-      // Tallennetaan valittu teema local storageen
+      
       localStorage.setItem('theme', newTheme);
   });
 
@@ -93,38 +93,37 @@ async function loadTodos() {
 }
 
 function createTodoListItem(todo) {
-  // luodaan uusi LI-elementti
+
   let li = document.createElement('li')
-    // luodaan uusi id-attribuutti
+
   let li_attr = document.createAttribute('id')
-    // kiinnitetään tehtävän/todon id&#58;n arvo luotuun attribuuttiin 
+
   li_attr.value= todo._id
-    // kiinnitetään attribuutti LI-elementtiin
+
   li.setAttributeNode(li_attr)
-    // luodaan uusi tekstisolmu, joka sisältää tehtävän/todon tekstin
+
   let text = document.createTextNode(todo.text)
-    // lisätään teksti LI-elementtiin
+
   li.appendChild(text)
-    // luodaan uusi SPAN-elementti, käytännössä x-kirjan, jotta tehtävä saadaan poistettua
+
   let span = document.createElement('span')
-    // luodaan uusi class-attribuutti
+
   let span_attr = document.createAttribute('class')
-    // kiinnitetään attribuuttiin delete-arvo, ts. class="delete", jotta saadaan tyylit tähän kiinni
+
   span_attr.value = 'delete'
-    // kiinnitetään SPAN-elementtiin yo. attribuutti
+
   span.setAttributeNode(span_attr)
-    // luodaan tekstisolmu arvolla x
+
   let x = document.createElement('span')
 
   x.classList.add('fas', 'fa-trash-alt')
-    // kiinnitetään x-tekstisolmu SPAN-elementtiin (näkyville)
+
   span.appendChild(x)
-    // määritetään SPAN-elementin onclick-tapahtuma kutsumaan removeTodo-funkiota
+
   span.onclick = function() { removeTodo(todo._id) }
-    // lisätään SPAN-elementti LI-elementtin
+
   li.appendChild(span)
-    // palautetaan luotu LI-elementti
-    // on siis muotoa: <li id="mongoIDXXXXX">Muista soittaa...<span class="remove">x</span></li>
+
   return li
 }
 

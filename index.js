@@ -14,21 +14,24 @@ app.use(bodyParse.urlencoded({
     extended: true
 }))
 
-// Yhdistetään tietokantaan
+// Connecting to database
 
 mongoose.connect('mongodb+srv://ab8007:eWQoH2Df7z3GIZSz@todocluster.bx8hqpl.mongodb.net/todo_app', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 
+app.listen(port, () => {
+  console.log('Example app listening on port 3000')
+});
+
 var db = mongoose.connection;
 
-// Tarkistetaan yhteys
-
+// Checking connection
 db.on('error', () => console.log("error in connecting database"));
 db.once('open', () => console.log("Connected to Database"));
 
-// Reitti, joka ohjaa kirjautumaan
+// Route to index page with login view
 app.get("/", (req, res) => {
 
     res.set({
@@ -39,7 +42,7 @@ app.get("/", (req, res) => {
 
 })
 
-// Reitti käyttäjänimen hakemiselle, sillä nimeä ei ole suoraan URL:ssa
+// Route for getting the username to display it in the app
 app.get("/getUserInfo", async (req, res) => {
   const userId = req.query.userId;
   const user = await db.collection('users').findOne({ userID: userId });
@@ -52,31 +55,30 @@ app.get("/getUserInfo", async (req, res) => {
 });
 
 
-app.listen(port, () => {
-  console.log('Example app listening on port 3000')
-});
-
-// Reitit
-
 app.post("/login", async (request, response) => {
     try {
-      // Haetaan käyttäjän antamat käyttäjänimi ja salasana pyynnöstä
+      // Requesting username and password from the body element of the page
         const username = request.body.username;
         const password = request.body.password;
 
-        // Etsitään käyttäjä tietokannasta käyttäjänimen perusteella
+        // Searching for the user with username from the database
         const user = await db.collection('users').findOne({ name: username });
-
+        // Display error message if the user doesn't exist
         if (!user) {
             response.send("Käyttäjää tällä nimellä ei ole olemassa!");
         } else {
-          // Vertaillaan annettua salasanaa käyttäjän tietokannassa olevaan salasanaan
+          // Compare the input password to the one found in the database
             if (user.password === password) {
-              // Jos salasanat täsmäävät, ohjataan käyttäjä eteenpäin home.html-sivulle käyttäjän ID:n kanssa
+              // If the password matches, redirect the user
+
+              // NOTE
+
+              // Using uuID in the url to redirect users is intentionally bad design choice from security point of view. 
+              // Due to the nature of the project I am keeping things simple.
+
                 response.redirect('home.html?user=' + user.userID);
             } else {
-              // Jos salasanat eivät täsmää, lähetetään virheviesti
-                response.send("Väärä salasana!");
+                response.send("Käyttäjänimi ja salasana eivät täsmää!");
             }
         }
     } catch (error) {
@@ -85,7 +87,7 @@ app.post("/login", async (request, response) => {
 });
 
 
-// Uuden käyttäjän rekisteröinti
+// Schema and model for registering a new user
 
 const loginSchema = new mongoose.Schema({
     name: {
@@ -105,29 +107,28 @@ const loginSchema = new mongoose.Schema({
   
 const Signup = mongoose.model("users", loginSchema);
 
-// Signup reitti
+// Route for signup
 app.post("/signup", async (request, response) => {
 
-    // Määritetään vakiot käyttäjänimelle ja salasanalle body-elementistä
+    // Requesting the signup information from the body element
     const username = request.body.username;
     const password = request.body.password;
 
-    // Vaaditaan käyttäjältä molemmat tiedot
+    // Ensure the required information is given.
     if (!username || !password) {
       return response.status(400).json({ error: "Ole hyvä ja syötä molemmat tiedot." });
     }
 
-    // Määritetään vakio user
     const user ={
       name: request.body.username,
       password: request.body.password,
       userID: uuidv4(),
     }
   
-    // Tarkistetaan, ettei käyttäjää ole jo olemassa
+    // Checking if user already exists
     const alreadyUser = await Signup.findOne({name: user.name});
   
-    // Tulostetaan virhe tai lisätään käyttäjä tietokantaan
+    // Adding the new user to the database
     if(alreadyUser) {
       response.send("Käyttäjä on jo olemassa! Kokeile eri käyttäjänimeä.");
     } else {
@@ -137,16 +138,15 @@ app.post("/signup", async (request, response) => {
     }
   })
 
-// todo schema
+// Schema and model for adding a new todo entry
 const todoSchema = new mongoose.Schema({
   text: { type: String, required: true },
   userID: { type: String, required: true }
 })
 
-// model
 const Todo = mongoose.model('Todo', todoSchema, 'todos')
 
-// Routes here...
+// Route for adding a new todo entry
 
 app.post('/todos', async (request, response) => {
   const { text, userID } = request.body
